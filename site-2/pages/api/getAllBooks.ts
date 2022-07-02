@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {app, database} from "../../firebase/init.ts"
+import {app, database} from "../../firebase/init.js"
 import {collection, addDoc, getDocs, setDoc, doc} from 'firebase/firestore';
 
 const collectionBooksRef = collection(database, "Books");
 
 type Data = {
-  name: string
+  message?: string,
+  data?:any
 }
 
 export default function handler(
@@ -18,8 +19,8 @@ export default function handler(
 	  return{...item.data(), id: item.id}
 	})
 	
-	res.status(200).json(data)
+	res.status(200).json({data})
       })
-      .catch(err=>res.status(500).json(err))
+      .catch(err=>res.status(500).json({message:`Error: ${err}`}))
 
 }

@@ -1,32 +1,32 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {app, database} from "../../firebase/init.ts"
+import {app, database} from "../../firebase/init.js"
 import {collection, getDoc, doc} from 'firebase/firestore';
 
 const collectionBooksRef = collection(database, "Books");
 
 type Data = {
-  name: string
+  message?: string,
+  data?: any
 }
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const {barcode} = req.query
-  const bookRef = doc(database, "Books", barcode)
-  const book = await getDoc(bookRef)
+  const barcode:string = req.query.barcode as string
+  const bookRef = doc(database, 'Books', barcode );
 
+  const book = await getDoc(bookRef)
   if(book.exists()){
-    res.status(200).json(book.data())
+    res.status(200).json({data:book.data()})
   }
   else{
-    res.status(200).json("")
+    res.status(200).json({message:""})
   }
-
   //console.log(typeof(barcode))
 
-  res.status(200).json("test")
+  res.status(200).json({message:"test"})
 
 
 }
