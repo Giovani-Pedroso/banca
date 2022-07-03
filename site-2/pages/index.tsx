@@ -1,8 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import dotenv from 'dotenv';
+//dotenv.config();
 
 const Home: NextPage = () => {
+  //console.log("sera q foi", process.env.TEST)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +15,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className="text-4xl p-[20px] text-center text-blue-500">
-        Hello
+        Hello Heroku
       </h1>
     </div>
   )

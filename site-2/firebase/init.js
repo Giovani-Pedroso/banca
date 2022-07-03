@@ -1,7 +1,6 @@
-import dotenv from 'dotenv';
 import { initializeApp } from "firebase/app";
 import { getFirestore} from'firebase/firestore';
-//import 'environment.d.ts';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const clientCredentials = {
@@ -11,6 +10,7 @@ const clientCredentials = {
     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FIREBASE_API_ID
 };
+console.log("sera q foi", process.env.TEST);
 
 export const app = initializeApp(clientCredentials);
 export const database = getFirestore(app);
