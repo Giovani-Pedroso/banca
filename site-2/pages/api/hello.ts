@@ -11,5 +11,13 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.status(200).json({ name: `test process.env.TEST=${process.env.TEST}` })
+  res.status(200).json({ name: `test
+ process.env.TEST=${process.env.TEST}
+
+    ${process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN},\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID},\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET},\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID},\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_API_ID}
+  ` })
 }
