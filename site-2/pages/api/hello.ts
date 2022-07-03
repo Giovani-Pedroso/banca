@@ -12,12 +12,12 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   res.status(200).json({ name: `test
- process.env.TEST=${process.env.TEST}
-
-    ${process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN},\n
-    ${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID},\n
-    ${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET},\n
-    ${process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID},\n
+ process.env.TEST=${process.env.TEST}${"\n"}
+    ${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}${"\n"}
+    ${process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN},${"\n"}\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID},${"\n"}\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET},${"\n"}\n
+    ${process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID},${"\n"}\n
     ${process.env.NEXT_PUBLIC_FIREBASE_API_ID}
   ` })
 }
