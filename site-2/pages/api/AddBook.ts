@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {app, database} from "../../firebase/init.js"
 import {collection, doc, setDoc} from 'firebase/firestore';
+import Cors from 'cors'
 
 const collectionBooksRef = collection(database, "Books");
 
@@ -9,13 +10,30 @@ type Data = {
   message: string
 }
 
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+})
+
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}
+
 const aVeryStrongPassword="Havia um homem, bem homem, mutio homem, porem descobriram que ele não era um homem e sim um cavalo"
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   
+  await runMiddleware(req, res, cors)
   let dataToAdd =  JSON.parse(req.body)
   
   if(dataToAdd.password != aVeryStrongPassword){
